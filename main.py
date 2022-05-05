@@ -24,7 +24,7 @@ def GetEmails(html, list) :
                 emails.append(link)
     
     #get unique results
-    emails = list(dict.fromkeys(emails))
+    #emails = dict.fromkeys(emails)
 
     return emails
 
@@ -64,7 +64,7 @@ def GetCompanySitebyFirstResult(driver_service, driver_option, company_name) :
 
         
 def main(company_name) :
-    chrome_service = Service('C:\\Users\\salah\\Downloads\\chromedriver_win32\\chromedriver.exe')
+    chrome_service = Service('C:\\Users\\user\\Downloads\\chromedriver_win32\\chromedriver.exe')
     chrome_options = Options()
     chrome_options.binary_location = 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe'
     chrome_options.add_argument('headless')
@@ -92,4 +92,4 @@ def main(company_name) :
 
 
 if __name__ == "__main__" :
-    main("BCC Lease spa")
+    main("alba pcb")
