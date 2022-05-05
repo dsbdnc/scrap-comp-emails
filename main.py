@@ -36,8 +36,10 @@ def GetCompanySitebyCompProfile(driver_service, driver_option, company_name) :
 
     try :
         company_site = driver.find_element(by=By.CLASS_NAME, value='ab_button').get_attribute('href')
+        driver.quit()
         return {'rc' : True, 'result' : company_site}
     except NoSuchElementException :
+        driver.quit()
         return {'rc' : False, 'result' : "Company site not found"}
 
 def GetCompanySitebyFirstResult(driver_service, driver_option, company_name) :
@@ -49,6 +51,7 @@ def GetCompanySitebyFirstResult(driver_service, driver_option, company_name) :
         soup = BeautifulSoup(driver.page_source, 'html.parser')
         links = soup.find_all('div', class_="yuRUbf")
         company_site = links[0].a.get('href')
+        driver.quit()
 
         if "www.dnb.com" not in company_site :
             return {'rc' : True, 'result' : company_site}
@@ -56,6 +59,7 @@ def GetCompanySitebyFirstResult(driver_service, driver_option, company_name) :
             return {'rc' : False, 'result' : "First search result from D&B"}
         
     except NoSuchElementException :
+        driver.quit()
         return {'rc' : False, 'result' : "Company site not found"}
 
         
@@ -80,6 +84,8 @@ def main(company_name) :
         
         WebDriverWait(driver, 100).until(EC.presence_of_element_located((By.TAG_NAME, 'body')))
         emails = GetEmails(driver.page_source, emails)
+
+        driver.quit()
         print(emails)
     else :
         print("<<< Not found the company website.")
